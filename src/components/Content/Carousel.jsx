@@ -9,22 +9,19 @@ const images = [
 const Carousel = () => {
   const [currentImage, setCurrentImage] = useState(0);
 
+  const handleImageClick = (index) => {
+    setCurrentImage(index);
+  };
+
   return (
-    <div className="relative w-72 h-96 mx-auto overflow-hidden rounded-xl shadow-lg">
+    <div className="relative w-72 h-96 mx-auto overflow-hidden shadow-lg rounded-[3rem]">
       <div
         className="flex transition-transform duration-500 ease-in-out transform translate-x[-100%]"
         style={{ transform: `translateX(-${currentImage * 100}%)` }}
       >
         {images.map((image, index) => (
-          <div
-            key={index}
-            className={`w-full flex-shrink-0${index === currentImage ? ' active' : ''}`}
-          >
-            <img
-              src={image}
-              alt={`Slide ${index + 1}`}
-              className="w-full h-full object-cover"
-            />
+          <div key={index} className={`w-full flex-shrink-0${index === currentImage ? ' active' : ''}`}>
+            <img src={image} alt={`Slide ${index + 1}`} className="w-full h-full object-cover" />
           </div>
         ))}
       </div>
@@ -35,8 +32,8 @@ const Carousel = () => {
             className={`h-2 w-2 rounded-full bg-gray-500 cursor-pointer transition-opacity ease-in-out${
               index === currentImage ? ' bg-gray-800 opacity-100' : ' opacity-50 hover:opacity-75'
             }`}
-            onClick={() => setCurrentImage(index)}
-          ></span>
+            onClick={() => handleImageClick(index)}
+          />
         ))}
       </div>
     </div>
